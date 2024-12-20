@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Popover, Button, Modal, Col, ProgressBar, Alert as BootstrapAlert, Form} from "react-bootstrap";
-import {Skeleton, Snackbar, Alert, Tab, Tabs} from '@mui/material';
+import {Snackbar, Alert, Tab, Tabs} from '@mui/material';
 import { IoIosInformationCircleOutline, } from "react-icons/io";
 import {  FaVideo, FaTags } from "react-icons/fa";
-import { CiHeart } from "react-icons/ci";
+import { FaRegStar, FaStar } from "react-icons/fa6";
 import { AiFillCaretDown } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ import { PiSmileyFill, PiSmileyMehFill, PiSmileyNervousFill } from "react-icons/
 import { FaUserCircle } from 'react-icons/fa';
 import { GoDotFill } from "react-icons/go";
 import { FaArrowUp } from "react-icons/fa";
+import { getDeviceType } from '../../components/deviceCheck';
 
 
 function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
@@ -22,9 +23,10 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
   const [isDataReady, setIsDataReady] = useState(false); // Track data readiness
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [reviews, setReviews] = useState(reviewsData); // State to store reviews
+  // const [reviews, setReviews] = useState(reviewsData); // State to store reviews
   const [newReview, setNewReview] = useState(''); // State for the input review
   const [formattedReviews, setFormattedReviews] = useState([]);
+  const deviceType = getDeviceType();
 
   // API name
   const API_URL = process.env.REACT_APP_API_URL;
@@ -357,7 +359,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
               {/* Favourite Button */}
               <Button
                 onClick={handleAddRemoveFromFavourites}
-                className={`search-button ${isFavourite ? "btn-danger" : ""}`}
+                className={`${isFavourite ? "search-button" : "favourites_button "}`}
                 disabled={isLoading} // Disable button while loading
               >
                 {isLoading ? (
@@ -367,8 +369,8 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
                   </span>
                 ) : (
                   <>
-                    <CiHeart style={{ fontSize: "30px", marginRight: "10px" }} />
-                    {isFavourite ? "Remove from Favourites" : "Add to Favourites"}
+                   {!isFavourite ? ( <FaRegStar style={{ fontSize: "25px", marginRight: deviceType === "Desktop" ? "10px" : "0px",}} /> ) : (<FaStar style={{ fontSize: "25px", marginRight: deviceType === "Desktop" ? "10px" : "0px", }} className="star_color" />)  }
+                   {deviceType === "Desktop" ? (isFavourite ? "Remove from Favourites" : "Add to Favourites") : ""}
                   </>
                 )}
               </Button>

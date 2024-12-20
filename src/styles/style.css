@@ -725,7 +725,7 @@ button:focus {
 
 .suggestion-list-item.active
 {
-  background-color: #066587;
+  background-color: #066587 !important;
   border: none !important;
   color: white;
 }
@@ -911,11 +911,13 @@ button:focus {
 }
 
 .category1 {
-  background-color: rgba(2, 79, 2, 0.897);
+  background-color: rgba(13, 97, 13, 0.314);
+  color: rgba(14, 234, 175, 0.937);
 }
 
 .category2 {
-  background-color: rgba(156, 5, 5, 0.837);
+  background-color: rgba(91, 3, 88, 0.285);
+  color: rgb(215, 159, 255);
   margin-left: 10px;
 }
 
@@ -1177,3 +1179,29 @@ button:focus {
   color:black;
 }
 
+/* Button Favourites */
+.favourites_button
+{
+  background-color: transparent!important;
+  border-color: #70cef0 !important;
+  transition:  0.3s ease !important;
+  color:#70cef0 !important;
+  z-index: 1;
+}
+
+.favourites_button:hover
+{
+  color: #0c0513 !important;
+  border: 1px solid black !important;
+  background-color: white !important;
+}
+
+.star_color
+{
+  color: #e7d809e9;
+}
+
+
+.search-button:hover .star_color  {   
+  color: #070606 !important; /* Color when hovering */
+}

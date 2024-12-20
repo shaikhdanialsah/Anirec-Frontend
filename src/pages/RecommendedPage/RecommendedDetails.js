@@ -113,7 +113,7 @@ const RecommendedDetails = () => {
                         <Col key={i} lg={3} md={4} sm={6} xs={6} className="custom-col" style={{ paddingBottom: '30px' }}>
                             <Row style={{ paddingTop: '10px', textAlign: 'center', paddingBottom:'15px' }}>
                                         <Col>
-                                            <h4 className="category category1" style={{fontSize:'17px', backgroundColor:'#106787',}}>{(anime.similarity * 100).toFixed(1)}% similar</h4>
+                                            <h4 className="category" style={{fontSize:'17px', backgroundColor:'#106787',}}>{(anime.similarity * 100).toFixed(1)}% similar</h4>
                                         </Col>
                                     </Row>
                             <Link to={`/anime/${anime.anime_id}`} className="anime-link">
