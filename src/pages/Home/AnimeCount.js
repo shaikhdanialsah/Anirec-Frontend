@@ -146,11 +146,11 @@ function AnimeCount() {
                 {animeCountdowns.slice(0, 6).map((anime, index) => {
                   const countdown = formatCountdown(anime.countdown);
                   return (
-                    <Col lg={4} md={6} sm={6} xs={6} key={index}>
+                    <Col lg={4} md={6} sm={6} xs={12} key={index}>
                       <Card style={{ marginBottom: "20px", backgroundColor: "rgba(83, 80, 80, 0.311)" }}>
                         <Card.Body>
                           <Row>
-                            <Col md={4}>
+                            <Col md={4} xs={4}>
                               {anime.image && (
                                 <img
                                   src={anime.image}
@@ -159,7 +159,7 @@ function AnimeCount() {
                                 />
                               )}
                             </Col>
-                            <Col md={8} style={{ textAlign: "left", color: "white" }}>
+                            <Col md={8} xs={8} style={{ textAlign: "left", color: "white" }}>
                               <div style={{ maxHeight: "90px" }}>
                                 <p style={{color:'white'}}>{anime.title}</p>
                                 <br />

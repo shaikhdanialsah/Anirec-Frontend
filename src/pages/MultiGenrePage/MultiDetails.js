@@ -233,8 +233,8 @@ function MultiDetails({ genre }) {
 
                           <Row style={{ paddingTop: '10px', textAlign: 'left' }}>
                             <Col>
-                              <span className="category category1">{anime.type === "TV" ? "TV Shows" : anime.type}</span>
-                              <span className="category category2">{anime.genres.split(",")[0].trim()}</span>
+                              <span className="category category1">{deviceType == 'Desktop' && anime.type === "TV" ? ("TV Shows") : anime.type}</span>
+                              <span className="category category2">{deviceType !='Desktop' && anime.genres.split(",")[0].trim() === 'Award Winning' ? ('Award') : anime.genres.split(",")[0].trim()}</span>
                             </Col>
                           </Row>
                           <h6 style={{ paddingTop: '20px', textAlign: 'left' }}>{anime.title}</h6>

@@ -117,10 +117,10 @@ function AnimePopular() {
                     <Row style={{ paddingTop: '10px', textAlign: 'left' }}>
                       <Col>
                         <span className="category category1">
-                          {anime.type === "TV" ? ("TV Shows") : anime.type}
+                          {deviceType == 'Desktop' && anime.type === "TV" ? ("TV Shows") : anime.type}
                         </span>
                         <span className="category category2">
-                          {anime.genres.split(",")[0].trim()}
+                          {deviceType !='Desktop' && anime.genres.split(",")[0].trim() === 'Award Winning' ? ('Award') : anime.genres.split(",")[0].trim()}
                         </span>
                       </Col>
                     </Row>

@@ -375,7 +375,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
             </h6>
 
             {/* Description */}
-            <div style={{ textAlign: "justify" }}>
+            <div style={{ textAlign: "justify", paddingTop:'20px' }}>
               <h5>Description: </h5>
               <p className="grey">{description}</p>
               <br />

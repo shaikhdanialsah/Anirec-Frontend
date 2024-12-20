@@ -181,8 +181,8 @@ function Login() {
           <br />
           <Card
             sx={{
-              paddingLeft: "40px",
-              paddingRight: "40px",
+              paddingLeft: "15px",
+              paddingRight: "15px",
               paddingTop: "30px",
               paddingBottom: "40px",
               backgroundColor: "#1213178d",

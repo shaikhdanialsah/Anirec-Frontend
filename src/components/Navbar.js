@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, Container, Nav, Navbar, Modal } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { MdLogin, MdLogout } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
@@ -55,8 +55,6 @@ function NavBar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [navbarRef]);
-
-  const closeNav = () => updateExpanded(false);
 
   const [paddingLeft, setPaddingLeft] = useState("0px");
   const [paddingTop, setPaddingTop] = useState("0px");

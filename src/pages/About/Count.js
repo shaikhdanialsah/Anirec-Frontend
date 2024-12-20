@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Row, Col,Card } from "react-bootstrap";
 import { HiUsers } from "react-icons/hi";
 import { BiWorld } from "react-icons/bi";
-import { AnimationControl, zoomIn, fadeIn } from "../../components/AnimationControl";
 import { GrMultimedia } from "react-icons/gr";
 import { FaRankingStar } from "react-icons/fa6";
 import { FaTheaterMasks } from "react-icons/fa";

@@ -4,7 +4,6 @@ import AboutDescription from "./AboutDescription";
 import HomeContact from "./HomeContact";
 import Count from "./Count";
 import Tools from "./Tools";
-import Chart from "./Chart";
 import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { motion } from "framer-motion";
@@ -48,7 +47,6 @@ function About() {
     <AboutDescription />
     <Tools />
     <Count />
-    {/* <Chart /> */}
     <HomeContact />
     </section>
   );

@@ -92,7 +92,7 @@ function Anicyclopedia() {
               &nbsp;&gt;<span className="grey"> &nbsp;Browse</span>
         </div>
         <Col
-            md={9}
+            md={12}
             style={{
               justifyContent: "center",
               paddingTop: "10px",
@@ -108,7 +108,11 @@ function Anicyclopedia() {
               <strong><span className="font-color"><CgBrowse /> Browse Anime</span></strong>
             </motion.h2>
 
-            <button style={{borderRadius:'30px', minWidth:'420px', textAlign:'left', padding:'10px 20px', backgroundColor:'whitesmoke', border:'none'}} onClick={handleSearchModalOpen}>Search Anime...</button>
+            {deviceType == 'Desktop' ? 
+            (<button style={{borderRadius:'30px', textAlign:'left', minWidth:'450px',padding:'10px 20px', backgroundColor:'whitesmoke', border:'none'}} onClick={handleSearchModalOpen}>Search Anime...</button>) :
+            (<button style={{borderRadius:'30px', textAlign:'left', width:'80vw',padding:'10px 20px', backgroundColor:'whitesmoke', border:'none'}} onClick={handleSearchModalOpen}>Search Anime...</button>)
+            }
+            
           </Col>
         </Row>
       </Container>
@@ -150,8 +154,8 @@ function Anicyclopedia() {
             <ListGroup.Item key={index} style={{border:'none'}} className="search-list">
                 <Link to={anime.title != "No results found" ? `/anime/${anime.anime_id}` : ''} className="link-item">
                   <Row>
-                  <Col lg={1} xs={2}><img src={anime.main_picture} style={{maxWidth:'60px'}}/></Col>
-                  <Col lg={11} xs={10}>
+                  <Col lg={1} xs={3}><img src={anime.main_picture} style={{maxWidth:'60px'}}/></Col>
+                  <Col lg={11} xs={9}>
                     <Row style={{fontWeight:'bold'}} className="search-title"><p>{anime.title}</p></Row>
                     <Row className="search-rate">
                       <p>{anime.title !== "No results found" ? (
