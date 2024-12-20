@@ -15,7 +15,7 @@ function Single() {
   const [animeData, setAnimeData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isFavourite, setIsFavourite] = useState(null); // Track whether anime is in favourites
-  const [reviewsData, setReviews] = useState(null);
+  const [reviewsData, setReviews] = useState([]);
   const [user, setUser] = useState(null);
 
   // API name
@@ -84,9 +84,8 @@ function Single() {
         });
       
         if (!reviewsResponse.ok) throw new Error("Failed to fetch anime reviews");
-        const reviewsData = await reviewsResponse.json();
-        setReviews(reviewsData.favourites || []);
-      
+        const reviews = await reviewsResponse.json();
+        setReviews(reviews.reviews || []);
         setLoading(false);
       } catch (err) {
         console.error("Error:", err);
