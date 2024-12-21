@@ -123,7 +123,7 @@ console.log(randomAnime);
           </Button>
         </Col>
         <Col xs={12} md={11} className="mb-3">
-          <Card style={{ height: '420px', backgroundColor: 'rgba(20, 20, 20, 0.511)', border: '1px solid white' }}>
+          <Card style={{ minHeight: '420px', backgroundColor: 'rgba(20, 20, 20, 0.511)', border: '1px solid white' }}>
             <Card.Body style={{ padding: '20px'}} className='font-color'>
               {loading ? (
                 <>
