@@ -48,7 +48,7 @@ function SimilarAnime({ anime, animeData }) {
         <>
           <Container className="font-color">
             {animeData.length > 0 ? (
-              <Row style={{paddingLeft:'20px'}}>
+              <Row>
                 <h5 style={{textAlign:'left', color:'white'}}>More anime like {" "}<span className="purple">{anime.title}</span></h5><br /><br />
                 {animeData.slice(0, visibleItems).map((anime, i) => (
                   <Col key={i} lg={3} md={4} sm={6} xs={6} className="custom-col" style={{ paddingBottom: "30px" }}>
