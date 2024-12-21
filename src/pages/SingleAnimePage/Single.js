@@ -4,7 +4,7 @@ import { Container, Row, Placeholder, Button } from "react-bootstrap";
 import SingleDetails from "./SingleDetails";
 import { IoIosArrowBack } from "react-icons/io";
 import axios from "axios";
-import wallpaper6 from './wallpaper_6.jpg';
+import wallpaper6 from '../../assets/anime_dashboard.jpg';
 import SimilarAnime from "./SimilarAnime";
 
 function Single() {
