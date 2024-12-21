@@ -507,7 +507,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
         
               {/* Section to add a new review */}
               {isLoggedIn ? (
-                 <Col lg={8}>
+                 <Col lg={8} style={{paddingLeft:'2px'}}>
                    <Form onSubmit={handleAddReview}>
                      <Form.Group style={{ position: 'relative' }}>
                        <Form.Control
@@ -543,7 +543,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
                    </Form>
                   </Col>
               ) : (
-                <Col lg={8} >
+                <Col lg={8} style={{paddingLeft:'2px'}}>
                   <Button onClick={handleLogin} className="search-button" >Login to add a review</Button>
                 </Col>
                 
