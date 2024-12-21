@@ -473,7 +473,7 @@ function Profile() {
                                   <p className="purple">Score: {fav.score.toFixed(2)}</p>
                                   <p style={{ color: "grey" }}>
                                     Status:{" "}
-                                    <span style={{ color: fav.status === "FINISHED" ? "#70cef0" : "#90ee90" }}>
+                                    <span style={ fav.status === "FINISHED" ? { color: "#70cef0", backgroundColor:'#242651ca', borderRadius:'10px', padding:'3px' }: {color: "rgba(14, 234, 175, 0.937)", backgroundColor:'rgba(13, 97, 13, 0.314)', borderRadius:'10px', padding:'3px'}}>
                                       {fav.status=='FINISHED'? 'Completed' : 'On-Going'}
                                     </span>
                                   </p>
