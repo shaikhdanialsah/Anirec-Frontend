@@ -259,7 +259,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
   return (
     <Container fluid className="home-contact" id="about">
       <Container>
-        <Row style={{ paddingTop: "50px", paddingLeft: "20px", textAlign: "left" }} className="font-color">
+        <Row style={{ paddingTop: "50px", textAlign: "left" }} className="font-color">
           <Col lg={8}>
             <h2 style={{ paddingBottom: "10px" }}>{title}</h2>
 
@@ -351,7 +351,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
                   </Popover>
                 }
               >
-                <Button variant="dark" style={{ fontSize: "12px", padding: "7px", marginRight:'20px' }}>
+                <Button variant="dark" style={{ fontSize: "12px", padding: "7px", marginRight:'10px' }}>
                   <AiFillCaretDown />
                 </Button>
               </OverlayTrigger>
@@ -369,7 +369,8 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
                   </span>
                 ) : (
                   <>
-                   {!isFavourite ? ( <FaRegStar style={{ fontSize: "25px", marginRight: deviceType === "Desktop" ? "10px" : "0px",}} /> ) : (<FaStar style={{ fontSize: "25px", marginRight: deviceType === "Desktop" ? "10px" : "0px", }} className="star_color" />)  }
+                   {!isFavourite ? ( <FaRegStar style={{ fontSize: "25px", marginRight: deviceType === "Desktop" ? "10px" : "0px",}} /> ) 
+                   : (<FaStar style={{ fontSize: "25px", marginRight: deviceType === "Desktop" ? "10px" : "0px", }} className="star_color" />)  }
                    {deviceType === "Desktop" ? (isFavourite ? "Remove from Favourites" : "Add to Favourites") : ""}
                   </>
                 )}
@@ -426,7 +427,6 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
             '& .MuiTab-root': {
               borderRadius: '10px',  // Make it pill shaped
               textTransform: 'none',
-              marginLeft:'20px',
               fontSize: '17px',
               fontFamily: 'Quicksand, sans-serif',
               color: 'rgb(219, 217, 217)',
@@ -444,7 +444,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
          
             {selectedTab === 0 && (
               <>
-               <Row style={{ paddingLeft: "20px", textAlign: "left", paddingBottom: "10px", color: "white", paddingTop:'20px' }}>
+               <Row style={{ textAlign: "left", paddingBottom: "10px", color: "white", paddingTop:'20px' }}>
                   {/* Studio Name */}
                   <Col lg={8} className="d-flex justify-content-between">
                     <h6><FaTags style={{marginRight:'8px'}} className="purple"/>Studio</h6>
@@ -478,7 +478,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
             {selectedTab === 1 && (
               <Row style={{ paddingLeft: '20px', textAlign: 'left', paddingBottom: '10px', color: 'white', paddingTop: '20px' }}>
               {/* Section to display reviews */}
-              <Col lg={8} style={{ marginBottom: '20px', paddingLeft:'20px', maxHeight:'250px', overflow:'hidden', overflowY:'auto' }}>
+              <Col lg={8} style={{ marginBottom: '20px', maxHeight:'250px', overflow:'hidden', overflowY:'auto' }}>
                 {formattedReviews.length > 0 ? (
                   formattedReviews.map((review) => (
                     <Row key={review.id} className="mb-3" style={{paddingBottom:'15px'}}>
