@@ -12,7 +12,7 @@
 
   🐜 <a href="https://github.com/shaikhdanialsah/Anirec-Frontend/issues">Report Bug</a> | ✨ <a href="https://github.com/shaikhdanialsah/Anirec-Frontend/issues">Request Features</a>
   <br /><br />
-  Here is the link to backend repository: [Anirec-Backend](https://github.com/shaikhdanialsah/Anirec-Backend)
+  Here is the link to backend repository: [Anirec-Backend](https://github.com/shaikhdanialsah/Anirec-Backend)<br /><br />
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />&nbsp;
   <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" />&nbsp;
   <img src="https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=white" />&nbsp;
