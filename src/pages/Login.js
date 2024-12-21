@@ -107,7 +107,6 @@ function Login() {
         setSnackbarSeverity("success");
         setSnackbarMessage("Login successful!");
         setSnackbarOpen(true);
-        navigate('/home');
         window.location.href = 'https://anirec.vercel.app/home';
       } else {
         setErrorMessage("Invalid email or password.");
