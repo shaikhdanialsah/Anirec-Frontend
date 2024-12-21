@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 // import { CiBookmark } from "react-icons/ci";
 // import { Tooltip } from "react-tooltip";
 import { IoIosArrowDown } from "react-icons/io";
+import {getDeviceType} from "../../components/deviceCheck"
 
 const getItemNumbers = (screenWidth) => {
     if (screenWidth > 1400) {
@@ -22,6 +23,7 @@ const getItemNumbers = (screenWidth) => {
     }
 };
 
+const deviceType = getDeviceType();
 const RecommendedDetails = () => {
     const { searchQuery } = useParams(); // Get searchQuery from the URL
     const [recommendations, setRecommendations] = useState([]);
@@ -120,7 +122,7 @@ const RecommendedDetails = () => {
                                 <div className="anime-item" style={{ textAlign: 'left', padding: '0 10px', position: 'relative' }}>
                                     <img src={anime.main_picture} alt="anime-image" className="anime-image" />
                                     <div className="anime-overlay">
-                                        <Row>
+                                        {deviceType != "Mobile" && ( <Row>
                                             <h6 className="anime-description-title">
                                                 <span style={{ fontSize: '13px', color: 'grey' }}>Title:</span><br />
                                                 {anime.title}
@@ -141,7 +143,8 @@ const RecommendedDetails = () => {
                                             {/* Bookmark button */}
                                             {/* <CiBookmark style={{ bottom: '10px', position: 'absolute', fontSize: '25px' }} id={`book-mark${i}`} className="purple" />
                                             <Tooltip anchorId={`book-mark${i}`} content="Bookmark" style={{ fontSize: '15px', backgroundColor: '#70cef0', color:'black',fontWeight:'bold' }} /> */}
-                                        </Row>
+                                        </Row>)}
+                                       
                                     </div>
                                     <Row style={{ paddingTop: '10px', textAlign: 'left' }}>
                                         <Col>
