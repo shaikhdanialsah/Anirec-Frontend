@@ -121,7 +121,7 @@ const RecommendedDetails = () => {
                             <Link to={`/anime/${anime.anime_id}`} className="anime-link">
                                 <div className="anime-item" style={{ textAlign: 'left', padding: '0 10px', position: 'relative' }}>
                                     <img src={anime.main_picture} alt="anime-image" className="anime-image" />
-                                    <div className="anime-overlay">
+                                    <div className={deviceType === "Desktop" ? "anime-overlay" : "anime-overlay-mobile"}>
                                         {deviceType != "Mobile" && ( <Row>
                                             <h6 className="anime-description-title">
                                                 <span style={{ fontSize: '13px', color: 'grey' }}>Title:</span><br />
