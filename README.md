@@ -69,7 +69,7 @@ npm start
 ```bash
 REACT_APP_API_URL= YOUR_API_URL
 ```
-If you run the backend locally, the API url would be `http://localhost:5000/api`. Refer [backend documentation](https://github.com/shaikhdanialsah/Anirec-Backend) for more details on setting up the backend.
+If you run the backend locally, the API url would be `http://localhost:5000/api`. Refer [backend repository](https://github.com/shaikhdanialsah/Anirec-Backend) for more details on setting up the backend.
 
 ## Running in Production
 To deploy the frontend to Vercel or any other hosting platform, follow these steps:
