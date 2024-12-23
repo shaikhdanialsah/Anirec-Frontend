@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+ ::selection {
+  background: #65ecf143;
+} 
+
+/* :-moz-selection {
+  background: #75cff0;
+  color: rgb(4, 4, 4) !important; } */
+
+/* Navigation Header Styles */
+
+.App-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #282c34;
+  color: white;
+}
+
+.App-logo-small {
+  height: 40px;
+}
+
+.App-nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.App-nav-links li {
+  margin: 0;
+}
+
+.App-nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.App-nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Rest of the styles */
+.App {
+  text-align: center; 
+  /* cursor: url('../assets/wallpaper.jpg'), auto !important; */
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+}
+
+.hero-section {
+  background-color: #61dafb;
+  padding: 50px;
+  color: #282c34;
+}
+
+.hero-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  background-color: #282c34;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #1e2430;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+}
+
+.feature-item {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 30%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.feature-item p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.App-footer {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+}
+
+.App-footer a {
+  color: #61dafb;
+  text-decoration: none;
+}
+
+
+@keyframes bounce_down {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(10px); /* Move down */
+  }
+  60% {
+    transform: translateY(5px);  /* Move a bit less */
+  }
+}
+
+@keyframes bounce_up {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateY(5px);
+  }
+  60% {
+    transform: translateY(10px);  
+  }
+}
+
+.back-home-link
+{
+  color: aliceblue;
+  text-decoration: none !important;
+  transition: transform 0.8s ease;
+  padding: 6px;
+}
+
+.back-home-link:hover
+{
+  color: #61dafb;
+  text-decoration: none !important;
+  text-shadow: 0 0 1.2px #75cff0, 0 0 2px #75cff0;
+  background-color:#282c34;
+  border-radius: 30px;
+  transition: 0.3s ease-in-out;
+}
+
+.font-color
+{
+  color:white !important;
+}
+
+/* --------- */
+/*  Preloader */
+/* --------- */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  background-color: #0c0513;
+  background-image: url(../assets/pre.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#preloader-none {
+  opacity: 0;
+}
+
+#no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+

@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@480&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Quicksand", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #070c0d !important;
+  /* background-color: rgb(11, 22, 34) !important; */
+}
+
+
+
+
+
+/* @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
+body {
+  margin: 0;
+  font-family: "Raleway", serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(11, 22, 34) !important;
+} 
+
+/* background-color: rgb(11, 18, 36) !important; */
