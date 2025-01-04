@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Spinner, Dropdown } from "react-bootstrap";
-// import { CiBookmark } from "react-icons/ci";
 import { Link } from "react-router-dom";
-// import { Tooltip } from "react-tooltip";
 import { BiSort } from "react-icons/bi";
 import { IoFilter } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
@@ -63,29 +61,39 @@ function MultiDetails({ genre }) {
 
   useEffect(() => {
     const handleResize = () => {
-      setVisibleItems(getItemNumbers(window.innerWidth));
+      const baseItems = getItemNumbers(window.innerWidth);
+      // Only update if visibleItems is less than the base number
+      if (visibleItems < baseItems) {
+        setVisibleItems(baseItems);
+      }
     };
-
+  
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
-
+  }, [visibleItems]);
+  
+  const loadMore = () => {
+    // Increment visibleItems without recalculating from scratch
+    const increment = getItemNumbers(window.innerWidth);
+    setVisibleItems((prevVisibleItems) => prevVisibleItems + increment);
+  };
+  
   useEffect(() => {
     if (animeData.length > 0) {
       applyFiltersAndSort();
     }
-  }, [sortBy, filterBy, animeData]);  // Apply filters only when data has been loaded
-
+  }, [sortBy, filterBy, animeData]);
+  
   const applyFiltersAndSort = () => {
-    let filtered = [...animeData];  // Clone the array to avoid mutation
-
+    let filtered = [...animeData]; // Clone the array to avoid mutation
+  
     // Filter
     if (filterBy !== 'All') {
       filtered = filtered.filter(anime => anime.type === filterBy);
     }
-
+  
     // Sort
     if (sortBy === 'Popularity') {
       filtered.sort((a, b) => b.rating - a.rating);
@@ -94,14 +102,10 @@ function MultiDetails({ genre }) {
     } else if (sortBy === 'Newest') {
       filtered.sort((a, b) => parseInt(b.year) - parseInt(a.year));
     }
-
+  
     setFilteredData(filtered);
-    setVisibleItems(getItemNumbers(window.innerWidth)); // Reset visible items
   };
-
-  const loadMore = () => {
-    setVisibleItems(prevVisibleItems => prevVisibleItems + getItemNumbers(window.innerWidth));
-  };
+  
 
   const handleClick = () => {
     setLoading_2(true);
@@ -215,16 +219,10 @@ function MultiDetails({ genre }) {
                                   <span style={{ fontSize: '13px', color: 'grey' }}>Genre:</span><br />
                                   {anime.genres}
                                 </h6>
-                                {/* <h6 className="anime-description-body">
-                                  <span style={{ fontSize: '13px', color: 'grey' }}>Released year:</span><br />
-                                  {anime.aired}
-                                </h6> */}
                                 <h6 className="anime-description-body">
                                   <span style={{ fontSize: '13px', color: 'grey' }}>Description:</span><br />
                                   {getAnimeDescription(anime.description, screenWidth)}
                                 </h6>
-                                {/* <CiBookmark style={{ bottom: '10px', position: 'absolute', fontSize: '25px' }} id={`book-mark${i}`} className="purple" />
-                                <Tooltip anchorId={`book-mark${i}`} content="Bookmark" style={{ fontSize: '15px', backgroundColor: '#70cef0', color:'black',fontWeight:'bold' }} /> */}
                               </Row>
                             </div>
                           ) : (

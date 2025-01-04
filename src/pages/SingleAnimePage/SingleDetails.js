@@ -54,8 +54,8 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
       reviewRefs.current[reviewId].classList.add('highlight-review');
       setTimeout(() => {
         reviewRefs.current[reviewId].classList.remove('highlight-review');
-      }, 1000);
-      // window.history.replaceState(null, '', window.location.pathname);
+      }, 4000);
+      window.history.replaceState(null, '', window.location.pathname);
     }
   }, [reviewId]);
 
@@ -345,9 +345,6 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
     }
   };
 
-  
-  
-
   return (
     <Container fluid className="home-contact" id="about">
       <Container>
@@ -368,13 +365,15 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
 
             <h6>
               <span style={{ color: "white" }}>Rating:</span>
-              {anime.score > 7 ? (
-                <PiSmileyFill style={{ marginRight: '5px', fontSize: '24px', color: '#52B640' }} />
-              ) : anime.score >= 5 ? (
-                <PiSmileyMehFill style={{ marginRight: '5px', fontSize: '24px', color: 'orange' }} />
-              ) : (
-                <PiSmileyNervousFill style={{ marginRight: '5px', fontSize: '24px', color: '#FF4433' }} />
-              )}
+              {deviceType === "Desktop" ? (
+                anime.score > 7 ? (
+                  <PiSmileyFill style={{ marginRight: '5px', fontSize: '24px', color: '#52B640' }} />
+                ) : anime.score >= 5 ? (
+                  <PiSmileyMehFill style={{ marginRight: '5px', fontSize: '24px', color: 'orange' }} />
+                ) : (
+                  <PiSmileyNervousFill style={{ marginRight: '5px', fontSize: '24px', color: '#FF4433' }} />
+                )
+              ) : (" ")}
               <span
                 style={{ color: anime.score > 7 ? '#52B640' : anime.score >= 5 ? 'orange' : '#FF4433', fontWeight: 'bold' }} >
                 {(Math.round(anime.score * 100) / 100).toFixed(2)}
@@ -457,7 +456,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
                 {isLoading ? (
                   <span>
                     <div className="spinner-border spinner-border-sm" role="status" style={{fontSize:"15px", marginRight: "10px" }}></div>
-                    {isFavourite ? "Removing..." : "Adding..."}
+                    {deviceType === "Desktop" && ( isFavourite ? "Removing..." : "Adding...")}
                   </span>
                 ) : (
                   <>
@@ -570,7 +569,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
             {selectedTab === 1 && (
               <Row style={{ paddingLeft: '20px', textAlign: 'left', paddingBottom: '10px', color: 'white', paddingTop: '20px' }}>
               {/* Section to display reviews */}
-              <Col lg={8} style={{ marginBottom: '20px', maxHeight: '250px', overflow: 'hidden', overflowY: 'auto' }}>
+              <Col lg={8} style={{ marginBottom: '20px', maxHeight: '350px', overflow: 'hidden', overflowY: 'auto' }}>
                 {formattedReviews.length > 0 ? (
                   formattedReviews.map((review) => (
                     <Row

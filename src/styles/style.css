@@ -8,8 +8,6 @@ html {
 
 .purple {
   color: #70cef0 !important;
-  color:#121317d1;
-  color:rgba(255, 255, 255, 0.91)
 }
 
 button:focus {
@@ -972,8 +970,8 @@ button:focus {
 }
 
 .highlight-review {
-  background-color: rgba(78, 78, 75, 0.43); /* Highlight color */
-  transition: background-color 1.5s ease;
+  background-color: rgba(78, 78, 75, 0.43) !important;
+  transition: background-color 0.5s ease !important;
 }
 
 
@@ -1229,7 +1227,23 @@ button:focus {
   color: #e7d809e9;
 }
 
-
 .search-button:hover .star_color  {   
   color: #070606 !important; /* Color when hovering */
+}
+
+.profile-item-selector
+{
+  background-color: transparent !important;
+}
+
+.profile-item-selector:hover
+{
+  background-color: rgba(128, 128, 128, 0.199) !important;
+}
+
+.review-hover:hover
+{
+  border:#066587 1px solid !important;
+  transition: ease-in-out 0.2s !important;
+  background-color: rgba(88, 87, 87, 0.201) !important;
 }

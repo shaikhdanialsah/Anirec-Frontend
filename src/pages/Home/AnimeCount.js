@@ -61,19 +61,23 @@ function AnimeCount() {
         );
 
         const animeData = response.data.data.Page.media
-          .filter((anime) => anime.nextAiringEpisode) // Remove anime with no upcoming episodes
-          .map((anime) => {
-            const offsetInSeconds = 2 * 60 * 60; // Example offset of 2 hours
-            const subRelease = anime.nextAiringEpisode.airingAt + offsetInSeconds;
-
-            return {
-              title: anime.title.english || anime.title.romaji,
-              episode: anime.nextAiringEpisode.episode,
-              countdown: subRelease - Math.floor(Date.now() / 1000),
-              image: anime.coverImage.large,
-            };
-          });
-        setAnimeCountdowns(animeData);
+        .filter((anime) => anime.nextAiringEpisode) // Remove anime with no upcoming episodes
+        .map((anime) => {
+          const offsetInSeconds = 2 * 60 * 60; // Example offset of 2 hours
+          const subRelease = anime.nextAiringEpisode.airingAt + offsetInSeconds;
+      
+          return {
+            title: anime.title.english || anime.title.romaji,
+            episode: anime.nextAiringEpisode.episode,
+            countdown: subRelease - Math.floor(Date.now() / 1000),
+            image: anime.coverImage.large,
+            subRelease, // Include subRelease for sorting
+          };
+        })
+        .sort((a, b) => a.subRelease - b.subRelease); // Sort by subRelease
+      
+      setAnimeCountdowns(animeData);
+      
       } catch (error) {
         console.error("Failed to fetch anime data", error);
       }
@@ -139,7 +143,7 @@ function AnimeCount() {
               transition={{ delay: 0.2 }}
               style={{ paddingBottom: "10px", paddingTop: "20px" }}
             >
-              <span className="grey">Upcoming Anime Releases <span className="purple">(Source: AniList )</span></span><br/>
+              <span className="grey">Upcoming Anime Releases <span className="purple"><a href="https://anilist.co/" target="blank" className="dashboard-link">(Source: AniList )</a></span></span><br/>
             </motion.p>
             {animeCountdowns.length > 0 ? (
               <Row>

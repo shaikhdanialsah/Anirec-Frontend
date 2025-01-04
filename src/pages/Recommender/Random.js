@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button, Card, Dropdown, Spinner, Modal } from "react-bootstrap";
 import { AnimationControl } from "../../components/AnimationControl";

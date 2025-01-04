@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Card, Dropdown, Col, Row, Alert as BootstrapAlert} from "react-bootstrap";
 import { Avatar, Tabs, Tab, Box, Skeleton, Snackbar, Alert,} from "@mui/material";
-import { FaRegCalendarAlt, FaRegEdit } from "react-icons/fa";
+import { FaRegCalendarAlt, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineLiveTv } from "react-icons/md";
 import { FaPlay } from "react-icons/fa";
 import wallpaper_1 from "../../assets/wallpaper_1.jpg";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { MdWifiTetheringError } from "react-icons/md";
+import { GrView } from "react-icons/gr";
+import { IoIosArrowDown } from "react-icons/io";
+
 
 
 function Profile() {
@@ -17,6 +20,9 @@ function Profile() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [isFetchingFavorites, setIsFetchingFavorites] = useState(false);
   const navigate = useNavigate();
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [visibleReviewCount, setVisibleReviewCount] = useState(3);
+
 
   // API name
   const API_URL = process.env.REACT_APP_API_URL;
@@ -412,48 +418,56 @@ function Profile() {
             <Tab label={`Review History (${user?.reviews?.length || 0})`} />
           </Tabs>
           <Box sx={{ padding: "20px", textAlign: "left" }}>
-            {selectedTab === 0 && (
+          {selectedTab === 0 && (
               <>
                 {isFetchingFavorites ? (
                   [...Array(3)].map((_, index) => (
                     <Skeleton key={index} variant="rectangular" height={120} style={{ marginBottom: "10px" }} />
                   ))
                 ) : user?.favourites?.length > 0 ? (
-                  user.favourites.map((fav, index) => (
-                    <Card key={index} style={{ marginBottom: "10px", backgroundColor: "#1a1a1a" }}>
-                      <Card.Body>
-                      
-                     {/* Dropdown icon */}
-                      <Dropdown style={{ textAlign: 'right', marginTop: '-10px', marginRight:'-20px' }}>
-                        <Dropdown.Toggle
-                          variant="link"
-                          id="dropdown-basic"
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "transparent",
-                            fontSize: "24px",
-                            padding: 0,
-                          }}
-                        >
-                        <PiDotsThreeOutlineVerticalFill className="grey" />
-                        </Dropdown.Toggle>
+                  <>
+                    {user.favourites.slice(0, visibleCount).map((fav, index) => (
+                      <Card key={index} style={{ marginBottom: "10px", backgroundColor: "#1a1a1a" }}>
+                        <Card.Body>
+                          {/* Dropdown icon */}
+                          <Dropdown style={{ textAlign: "right", marginTop: "-10px", marginRight: "-20px" }}>
+                            <Dropdown.Toggle
+                              variant="link"
+                              id="dropdown-basic"
+                              style={{
+                                backgroundColor: "transparent",
+                                border: "none",
+                                color: "transparent",
+                                fontSize: "24px",
+                                padding: 0,
+                              }}
+                            >
+                              <PiDotsThreeOutlineVerticalFill className="grey" />
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu align="end" style={{ backgroundColor: "rgb(49, 48, 48)" }}>
+                              <Dropdown.Item
+                                onClick={() => navigate(`/anime/${fav.anime_id}`)}
+                                className="profile-item-selector"
+                                style={{ color: "white" }}
+                              >
+                                <GrView style={{ marginRight: "10px" }} />
+                                View Anime
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                                onClick={() => handleRemoveFavorite(fav.anime_id)}
+                                className="profile-item-selector"
+                                style={{ color: "white" }}
+                              >
+                                <FaRegTrashAlt style={{ marginRight: "10px" }} />
+                                Remove from Favourites
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
 
-                        <Dropdown.Menu align="end" style={{ backgroundColor: 'rgb(49, 48, 48)'}}>
-                          <Dropdown.Item onClick={() => navigate(`/anime/${fav.anime_id}`)} className="genre-item-selector" style={{ color: 'white' }}>
-                            View Anime
-                          </Dropdown.Item>
-                          <Dropdown.Item onClick={() => handleRemoveFavorite(fav.anime_id)} className="genre-item-selector" style={{ color: 'white' }}>
-                            Remove from Favourites
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-
-                      
-                      {/* Anime details */}
-                       <Row style={{marginTop:'-30px'}}>
-                            <Col  lg={2} md={3} sm={4}>
-                              <div style={{margin:'10px', textAlign:'center'}}>
+                          {/* Anime details */}
+                          <Row style={{ marginTop: "-30px" }}>
+                            <Col lg={2} md={3} sm={4}>
+                              <div style={{ margin: "10px", textAlign: "center" }}>
                                 <img
                                   src={fav.main_picture}
                                   alt={fav.title}
@@ -466,72 +480,105 @@ function Profile() {
                                 />
                               </div>
                             </Col>
-                           
-                            <Col  lg={10} md={9} sm={8}>
-                              <Row style={{paddingTop:'10px'}}>
-                                <Col lg={11} >
-                                    <h5 style={{ color: "#fff" }}>{fav.title}</h5>
+
+                            <Col lg={10} md={9} sm={8}>
+                              <Row style={{ paddingTop: "10px" }}>
+                                <Col lg={11}>
+                                  <h5 style={{ color: "#fff" }}>{fav.title}</h5>
                                   <p className="purple">Score: {fav.score.toFixed(2)}</p>
                                   <p style={{ color: "grey" }}>
                                     Status:{" "}
-                                    <span style={ fav.status === "FINISHED" ? { color: "#70cef0", backgroundColor:'#242651ca', borderRadius:'10px', padding:'3px' }: {color: "rgba(14, 234, 175, 0.937)", backgroundColor:'rgba(13, 97, 13, 0.314)', borderRadius:'10px', padding:'3px'}}>
-                                      {fav.status=='FINISHED'? 'Completed' : 'On-Going'}
+                                    <span
+                                      style={
+                                        fav.status === "FINISHED"
+                                          ? { color: "#70cef0", backgroundColor: "#242651ca", borderRadius: "10px", padding: "3px" }
+                                          : { color: "rgba(14, 234, 175, 0.937)", backgroundColor: "rgba(13, 97, 13, 0.314)", borderRadius: "10px", padding: "3px" }
+                                      }
+                                    >
+                                      {fav.status === "FINISHED" ? "Completed" : "On-Going"}
                                     </span>
                                   </p>
                                 </Col>
-                                
                               </Row>
                             </Col>
-                            </Row>
-                            <Row>
-                                 {fav.nextAiringEpisode ? (
-                                      <p style={{ color: "#90ee90", textAlign:'right' }}>
-                                        <MdOutlineLiveTv style={{marginRight:'10px'}}/>Next Episode in:{" "}
-                                        {Math.ceil((fav.nextAiringEpisode.airingAt * 1000 - Date.now()) / (1000 * 60 * 60 * 24))}{" "}
-                                        days
-                                      </p>
-                                    ) : (
-                                      fav.status === "RELEASING" && <p style={{ color: "grey" }}>Airing complete</p>
-                                    )}                   
-                              </Row>
-                      </Card.Body>
-                    </Card>
-                  ))
+                          </Row>
+                          <Row>
+                            {fav.nextAiringEpisode ? (
+                              <p style={{ color: "#90ee90", textAlign: "right" }}>
+                                <MdOutlineLiveTv style={{ marginRight: "10px" }} />
+                                Next Episode in:{" "}
+                                {Math.ceil((fav.nextAiringEpisode.airingAt * 1000 - Date.now()) / (1000 * 60 * 60 * 24))} days
+                              </p>
+                            ) : (
+                              fav.status === "RELEASING" && <p style={{ color: "grey" }}>Airing complete</p>
+                            )}
+                          </Row>
+                        </Card.Body>
+                      </Card>
+                    ))}
+                    {user.favourites.length > visibleCount && (
+                      <div style={{ textAlign: "center", marginTop: "10px" }}>
+                        <button
+                          onClick={() => setVisibleCount((prev) => prev + 3)}
+                          className="multi-view-more"
+                        >
+                          <span style={{ padding: '10px' }}>
+                            Show more <IoIosArrowDown />
+                          </span>
+                        </button>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <h6>No favourites added yet.</h6>
                 )}
               </>
             )}
 
-            {selectedTab === 1 && (
-               <>
+          {selectedTab === 1 && (
+            <>
               {user?.reviews?.length > 0 ? (
-                user.reviews.map((review, index) => (
-                  <Card
-                    key={index}
-                    style={{ marginBottom: "10px", backgroundColor: "#1a1a1a", cursor:'pointer' }}
-                    onClick={() => clickReview(review.id, review.anime_id)} // Add onClick to trigger the redirect
-                  >
-                    <Card.Body>
-                      <Row>
-                        <h6 className="purple">
-                          {user.username}{" "}
-                          <span className="grey">
-                            <FaPlay style={{ fontSize: "10px", marginRight: "5px", marginLeft: "5px" }} />
-                            {review.title}
-                          </span>
-                        </h6>
-                        <h6 style={{ color: "white" }}> {review.comment}</h6>
-                        <h6 className="grey"> {review.created_at.slice(0, 16)}</h6>
-                      </Row>
-                    </Card.Body>
-                  </Card>
-                ))
+                <>
+                  {user.reviews.slice(0, visibleReviewCount).map((review, index) => (
+                    <Card
+                      key={index}
+                      style={{ marginBottom: "10px", backgroundColor: "#1a1a1a", cursor: "pointer" }}
+                      onClick={() => clickReview(review.id, review.anime_id)} // Add onClick to trigger the redirect
+                      className="review-hover"
+                    >
+                      <Card.Body>
+                        <Row>
+                          <h6 className="purple">
+                            {user.username}{" "}
+                            <span className="grey">
+                              <FaPlay style={{ fontSize: "10px", marginRight: "5px", marginLeft: "5px" }} />
+                              {review.title}
+                            </span>
+                          </h6>
+                          <h6 style={{ color: "white" }}>{review.comment}</h6>
+                          <h6 className="grey">{review.created_at.slice(0, 16)}</h6>
+                        </Row>
+                      </Card.Body>
+                    </Card>
+                  ))}
+                  {user.reviews.length > visibleReviewCount && (
+                    <div style={{ textAlign: "center", marginTop: "10px" }}>
+                      <button
+                        onClick={() => setVisibleReviewCount((prev) => prev + 3)}
+                        className="multi-view-more"
+                      >
+                       <span style={{ padding: '10px' }}>
+                          Show more <IoIosArrowDown />
+                        </span>
+                      </button>
+                    </div>
+                  )}
+                </>
               ) : (
                 <h6>You have not reviewed any anime yet.</h6>
               )}
-             </>
-            ) }
+            </>
+          )}
           </Box>
         </Box>
       </Container>

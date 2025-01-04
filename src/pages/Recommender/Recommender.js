@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AnimationControl, zoomIn } from "../../components/AnimationControl";
 import Random from "./Random";
-import { ImStatsBars } from "react-icons/im";
 import Recommend from "./Recommend";
 import { getDeviceType } from '../../components/deviceCheck';
 import { Tabs, Tab } from '@mui/material';  // Import MUI Tabs and Tab components

@@ -5,7 +5,7 @@ function Terms(){
         <>
            <strong>Last Updated: 19/12/2024</strong> <br /><br />
 
-This Data Collection and Privacy Policy ("Policy") outlines how <strong>Anirec+</strong> collects, uses, and protects your personal information when you visit our website [Your Website URL] ("Website").<br /><br />
+This Data Collection and Privacy Policy outlines how <strong>Anirec+</strong> collects, uses, and protects your personal information when you visit our website [https://anirec.vercel.app/] (Anirec+).<br /><br />
 By accessing or using our Website, you agree to the terms and conditions outlined in this Policy.<br /><br />
 
 <strong>1. Information We Collect</strong><br />
