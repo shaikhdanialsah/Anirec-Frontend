@@ -10,8 +10,7 @@ import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { MdWifiTetheringError } from "react-icons/md";
 import { GrView } from "react-icons/gr";
 import { IoIosArrowDown } from "react-icons/io";
-
-
+import { getDeviceType } from '../../components/deviceCheck';
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -22,6 +21,7 @@ function Profile() {
   const navigate = useNavigate();
   const [visibleCount, setVisibleCount] = useState(3);
   const [visibleReviewCount, setVisibleReviewCount] = useState(3);
+  const deviceType = getDeviceType();
 
 
   // API name
@@ -397,7 +397,7 @@ function Profile() {
           </div>
         </Card>
 
-        <Box sx={{ marginTop: "20px", backgroundColor: "#121317", color: "whitesmoke", padding: "20px", borderRadius: "8px" }}>
+        <Box sx={{ marginTop: "20px", backgroundColor: "#121317", color: "whitesmoke", padding: deviceType === "Desktop" ? "20px" : "" , borderRadius: "8px" }}>
           <Tabs value={selectedTab} onChange={handleTabChange} aria-label="profile tabs"
           sx={{
             '& .MuiTab-root': {
