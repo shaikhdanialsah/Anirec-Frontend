@@ -32,6 +32,19 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
   const location = useLocation(); // Get the current location to check the hash
   const [loadingReviewId, setLoadingReviewId] = useState(null);
   const [isLoadingReview, setIsLoadingReview] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const truncateDescription = (text, wordLimit) => {
+    const words = text.split(' ');
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(' ') + '...';
+    }
+    return text;
+  };
 
 
   useEffect(() => {
@@ -472,7 +485,18 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
             {/* Description */}
             <div style={{ textAlign: "justify", paddingTop:'20px' }}>
               <h5>Description: </h5>
-              <p className="grey">{description}</p>
+              <p className="grey">
+                {isExpanded ? description : truncateDescription(description, 30)}{' '}
+                {description.split(' ').length > 30 && (
+                  <span
+                    onClick={toggleReadMore}
+                    className="purple"
+                    style={{cursor:'pointer'}}
+                  >
+                    {isExpanded ? 'Show less' : 'Read more'}
+                  </span>
+                )}
+              </p>
               <br />
             </div>
           </Col>
