@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Spinner, Container, Row, Col } from "react-bootstrap";
+import { Spinner, Container, Row, Col, Modal, Button } from "react-bootstrap";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
-// import { CiBookmark } from "react-icons/ci";
-// import { Tooltip } from "react-tooltip";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
 import {getDeviceType} from "../../components/deviceCheck"
 
@@ -30,7 +29,8 @@ const RecommendedDetails = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [visibleItems, setVisibleItems] = useState(getItemNumbers(window.innerWidth));
-    const [screenWidth] = useState(window.innerWidth);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedAnime, setSelectedAnime] = useState(null);
 
     // API name
   const API_URL = process.env.REACT_APP_API_URL;
@@ -60,19 +60,24 @@ const RecommendedDetails = () => {
     // Adjust the number of visible anime based on screen size (browser inner width)
     useEffect(() => {
         const handleResize = () => {
-            setVisibleItems(getItemNumbers(window.innerWidth));
+          const baseItems = getItemNumbers(window.innerWidth);
+          // Only update if visibleItems is less than the base number
+          if (visibleItems < baseItems) {
+            setVisibleItems(baseItems);
+          }
         };
-
+      
         window.addEventListener('resize', handleResize);
         return () => {
-            window.removeEventListener('resize', handleResize);
+          window.removeEventListener('resize', handleResize);
         };
-    }, []);
-
-    // Load More Function
-    const loadMore = () => {
-        setVisibleItems((prevVisibleItems) => prevVisibleItems + getItemNumbers(window.innerWidth));
-    };
+      }, [visibleItems]);
+      
+      const loadMore = () => {
+        // Increment visibleItems without recalculating from scratch
+        const increment = getItemNumbers(window.innerWidth);
+        setVisibleItems((prevVisibleItems) => prevVisibleItems + increment);
+      };
 
     // Function for when user click the 'Load More' button
     const handleClick = () => {
@@ -102,11 +107,21 @@ const RecommendedDetails = () => {
         return num.toString();
       };
 
+      const handleShowModal = (anime) => {
+        setSelectedAnime(anime);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedAnime(null);
+    };
+
+
     return (
-        <Container fluid className="home-contact">
-            <br></br> 
+        <Container fluid className="home-contact"> 
             <span style={{ fontSize: '18px', color: '#70cef0', backgroundColor: '#242651ca', padding: '8px', borderRadius: '5px' }}>
-                <IoMdInformationCircleOutline style={{ fontSize: '22px' }} /> {recommendations.length} Anime(s) found
+                 {recommendations.length} Anime(s) found
             </span>
             <br></br> <br></br> <br></br>
             <Container className="font-color">
@@ -115,7 +130,7 @@ const RecommendedDetails = () => {
                         <Col key={i} lg={3} md={4} sm={6} xs={6} className="custom-col" style={{ paddingBottom: '30px' }}>
                             <Row style={{ paddingTop: '10px', textAlign: 'center', paddingBottom:'15px' }}>
                                         <Col>
-                                            <h4 className="category" style={{fontSize:'17px', backgroundColor:'#106787',}}>{(anime.similarity * 100).toFixed(1)}% similar</h4>
+                                            <Button className="search-button" style={{width:'100%', borderRadius:'30px'}} onClick={() => handleShowModal(anime)}><IoMdInformationCircleOutline style={{ fontSize: '20px', marginRight:'10px' }} />{(anime.similarity * 100).toFixed(1)}% similar</Button>
                                         </Col>
                                     </Row>
                             <Link to={`/anime/${anime.anime_id}`} className="anime-link">
@@ -139,10 +154,6 @@ const RecommendedDetails = () => {
                                                 <span style={{ fontSize: '13px', color: 'grey' }}>Description:</span><br />
                                                 {getAnimeDescription(anime.description)}
                                             </h6>
-
-                                            {/* Bookmark button */}
-                                            {/* <CiBookmark style={{ bottom: '10px', position: 'absolute', fontSize: '25px' }} id={`book-mark${i}`} className="purple" />
-                                            <Tooltip anchorId={`book-mark${i}`} content="Bookmark" style={{ fontSize: '15px', backgroundColor: '#70cef0', color:'black',fontWeight:'bold' }} /> */}
                                         </Row>)}
                                        
                                     </div>
@@ -175,6 +186,38 @@ const RecommendedDetails = () => {
                     </div>
                 )}
             </Container>
+            {/* Add modal to display anime similarity index */}
+                {selectedAnime && (
+                    <Modal show={showModal} onHide={handleCloseModal}>
+                         <Modal.Header closeButton closeVariant='white' style={{backgroundColor:'#121317',borderBottom:'black'}}>
+                            <Modal.Title style={{color:'whitesmoke'}}>Anime Similarity Index</Modal.Title>
+                        </Modal.Header>
+                       <Modal.Body style={{backgroundColor:'#121317e4', textAlign:'center',color:'whitesmoke'}}>
+                            <p className="purple">{selectedAnime.title}</p>
+                            <p style={{color:'grey'}}><FaArrowRightArrowLeft /></p>
+                            <p>{searchQuery}</p>
+                            <Row>
+                            <Col lg={4} md={4} sm={4} xs={4}>
+                                <span className="similarity title-badge">Title Similarity</span><br />
+                                {(selectedAnime.title_similarity * 100).toFixed(1)}%
+                            </Col>
+                            <Col lg={4} md={4} sm={4} xs={4}>
+                            <span className="similarity description-badge">Synopsis Similarity</span><br />
+                                {(selectedAnime.description_similarity * 100).toFixed(1)}%
+                            </Col>
+                            <Col lg={4} md={4} sm={4} xs={4}>
+                            <span className="similarity genre-badge">Genre Similarity</span><br />
+                                {(selectedAnime.genre_similarity * 100).toFixed(1)}%
+                            </Col>
+                            </Row>
+                        </Modal.Body>
+                        <Modal.Footer style={{backgroundColor:'#121317',borderTop:'black'}}>
+                            <Button className="search-button" onClick={handleCloseModal}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                )}
         </Container>
     );
 };

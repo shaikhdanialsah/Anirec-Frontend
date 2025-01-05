@@ -21,7 +21,8 @@ const { searchQuery } = useParams(); // Get searchQuery from the URL
         </div>
         </Row>
         <Row>
-        <h2><strong><span className="font-color">Top 20 animes similar to '{searchQuery}'</span></strong></h2>
+        <h2><strong><span className="font-color">Top 20 animes similar to <span className="purple">{searchQuery}</span></span></strong></h2>
+        <p style={{color:'grey'}}><span className='purple'>Info:</span> Click on the similarity button to view similarity percentage in detail</p>
         </Row>
       </Container>
     </Container>

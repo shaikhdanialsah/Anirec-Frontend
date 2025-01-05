@@ -1247,3 +1247,25 @@ button:focus {
   transition: ease-in-out 0.2s !important;
   background-color: rgba(88, 87, 87, 0.201) !important;
 }
+
+/* Similarity badge */
+.similarity {
+  padding: 4px;
+  font-size: 14px;
+  border-radius: 30px;
+}
+
+.title-badge {
+  background-color: rgba(91, 3, 88, 0.499);
+  color: rgba(215, 159, 255, 0.832);
+}
+
+.description-badge {
+  background-color: rgba(4, 89, 85, 0.499);
+  color: rgba(159, 244, 255, 0.832);
+}
+
+.genre-badge {
+  background-color: rgba(89, 4, 17, 0.499);
+  color: rgba(255, 159, 223, 0.832);
+}

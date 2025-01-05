@@ -46,18 +46,19 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
   const reviewRefs = useRef({}); // Object to hold refs for each review
 
   useEffect(() => {
-    // Scroll to the review and highlight it when reviewId changes
     if (reviewId && reviewRefs.current[reviewId]) {
-      reviewRefs.current[reviewId].scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      // Highlight the review for 1 second
-      reviewRefs.current[reviewId].classList.add('highlight-review');
+      const reviewElement = reviewRefs.current[reviewId];
+      reviewElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  
+      reviewElement.classList.add('highlight-review');
       setTimeout(() => {
-        reviewRefs.current[reviewId].classList.remove('highlight-review');
+        reviewElement.classList.remove('highlight-review');
       }, 4000);
+  
       window.history.replaceState(null, '', window.location.pathname);
     }
-  }, [reviewId]);
+  }, [reviewId, reviewRefs]);
+  
 
   // API name
   const API_URL = process.env.REACT_APP_API_URL;

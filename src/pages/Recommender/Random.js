@@ -127,7 +127,7 @@ console.log(randomAnime);
             <Card.Body style={{ padding: '20px'}} className='font-color'>
               {loading ? (
                 <>
-                   <div className="loading-spinner" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color:'#75cff0' }}>
+                   <div className="loading-spinner" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color:'#75cff0', margin:'100px' }}>
                     <Spinner animation="border" style={{ width: '3rem', height: '3rem' }} />
                     </div>
                 </>
