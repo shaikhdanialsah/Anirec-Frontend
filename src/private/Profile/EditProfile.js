@@ -38,7 +38,11 @@ function EditProfile() {
   const navigate = useNavigate();
 
   const wallpapers = ['https://rare-gallery.com/thumbs/945078-anime-Kimi-no-Na-Wa-night-low-angle.jpg', 'https://e1.pxfuel.com/desktop-wallpaper/204/232/desktop-wallpaper-comet-kimi-no-na-wa-your-name-your-name-pc.jpg', 'https://img.freepik.com/free-photo/japan-background-digital-art_23-2151546140.jpg'];
-  const avatars = ['https://avatarfiles.alphacoders.com/375/thumb-1920-375542.png', 'https://64.media.tumblr.com/e40126dcc0477972febd1d5b8a0e7f64/4ec7e6a83c8d9508-7d/s1280x1920/d813625ac450328d7adcb40ad8ce1bdf6e60c9ee.jpg', 'https://i.pinimg.com/564x/c3/c2/05/c3c20561f69db03c456a68ab0b4fc33c.jpg', 'https://cdn.mos.cms.futurecdn.net/AebrjUYkBvHG6YokQxeeCf.jpg'];
+  
+  // 5 Jan 2025 (Add new avatars for user profile picture)
+  const avatars = ['https://avatarfiles.alphacoders.com/375/thumb-1920-375542.png', 'https://64.media.tumblr.com/e40126dcc0477972febd1d5b8a0e7f64/4ec7e6a83c8d9508-7d/s1280x1920/d813625ac450328d7adcb40ad8ce1bdf6e60c9ee.jpg', 'https://i.pinimg.com/564x/c3/c2/05/c3c20561f69db03c456a68ab0b4fc33c.jpg', 'https://cdn.mos.cms.futurecdn.net/AebrjUYkBvHG6YokQxeeCf.jpg',
+  'https://i.pinimg.com/736x/dd/9a/7a/dd9a7a16bc6815a508b44b12d4df5407.jpg', 'https://i.redd.it/the-my-melody-anime-is-so-peak-v0-zgwoegg9l8dc1.png?width=2420&format=png&auto=webp&s=325e420187bbed8f4c433b14097588d96f322522', 'https://cdn.rafled.com/anime-icons/images/ab222a09d15e3d829c48ee5fa5470bc60004a5c8a65248b0d9dcd8a6d182c8ff.jpg','https://i.pinimg.com/originals/60/6f/e3/606fe3a7af3f5671aeb0463f1e72c581.jpg',
+  'https://i.pinimg.com/736x/1e/8b/f3/1e8bf3b2adefdfe76bb5dfe9bafe1ed5.jpg','https://i.pinimg.com/736x/c8/db/e9/c8dbe9c7b3abf17f237dc1b8275a9c73.jpg'];
 
 
   // API name
@@ -291,7 +295,7 @@ function EditProfile() {
           <Modal.Header closeButton closeVariant='white' style={{backgroundColor:'#121317',borderBottom:'black'}}>
             <Modal.Title style={{color:'whitesmoke'}}>Change {imageType}</Modal.Title>
           </Modal.Header>
-          <Modal.Body style={{backgroundColor:'#121317e4'}}>
+          <Modal.Body style={{backgroundColor:'#121317e4', maxHeight:'450px', overflow: 'hidden', overflowY: 'auto'}}>
             <Row>
               {(imageType === "background" ? wallpapers : avatars).map((image, index) => (
                 <div
@@ -332,6 +336,7 @@ function EditProfile() {
                         width: "150px",
                         height: "150px",
                         objectFit: "cover",
+                        marginLeft:'25px',
                         border:
                           previewImage === image
                             ? "4px solid #70cef0"
