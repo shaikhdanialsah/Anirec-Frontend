@@ -416,6 +416,7 @@ function Profile() {
             
             <Tab label={`Favourites (${user.favourites.length})`} />
             <Tab label={`Review History (${user?.reviews?.length || 0})`} />
+            
           </Tabs>
           <Box sx={{ padding: "20px", textAlign: "left" }}>
           {selectedTab === 0 && (
@@ -456,7 +457,7 @@ function Profile() {
                               <Dropdown.Item
                                 onClick={() => handleRemoveFavorite(fav.anime_id)}
                                 className="profile-item-selector"
-                                style={{ color: "white" }}
+                                style={{ color: "white",  }}
                               >
                                 <FaRegTrashAlt style={{ marginRight: "10px" }} />
                                 Remove from Favourites
@@ -579,6 +580,7 @@ function Profile() {
               )}
             </>
           )}
+
           </Box>
         </Box>
       </Container>

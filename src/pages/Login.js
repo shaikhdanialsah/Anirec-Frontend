@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import {Modal} from "react-bootstrap";
-import { Container,Tabs,Tab,Button,TextField, Box, CssBaseline, Card,Checkbox, FormControlLabel, InputAdornment, Typography, Alert, Snackbar, CircularProgress} from '@mui/material';
+import React, { useState} from "react";
+import {Modal, Form} from "react-bootstrap";
+import { Container,Tabs,Tab,Button,TextField, Box, CssBaseline, Card,Checkbox, FormControlLabel, InputAdornment, Alert, Snackbar, CircularProgress} from '@mui/material';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
@@ -145,6 +145,9 @@ function Login() {
         setSnackbarSeverity("success");
         setSnackbarMessage("Registration successful!");
         setSnackbarOpen(true);
+        setTimeout(() => {
+          window.location.href = '/login';
+        }, 200); 
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.error || "Registration failed.");
@@ -246,11 +249,14 @@ function Login() {
                       </InputAdornment>
                     ),
                   }}
-                  style={{paddingBottom:'20px'}}
+                  style={{paddingBottom:'5px'}}
                 />
+
                 <Button variant="contained" fullWidth type="submit" disabled={isLoginDisabled} style={isLoadingLogin ?{ backgroundColor :'grey'} : {}}>
-                {isLoadingLogin ? <CircularProgress size={24} color="inherit" /> : "Log In"}
+                  {isLoadingLogin ? <CircularProgress size={24} color="inherit" /> : "Log In"}
                 </Button>
+
+                
               </Box>
             )}
 
@@ -328,13 +334,13 @@ function Login() {
             )}
 
           <Modal show={show} onHide={handleClose} size="xl">
-              <Modal.Header closeButton>
-                <Modal.Title style={{color:'black'}}>Terms and Agreement for Anirec+</Modal.Title>
+            <Modal.Header closeButton closeVariant='white' style={{backgroundColor:'#121317',borderBottom:'black'}}>
+                <Modal.Title style={{color:'whitesmoke'}}>Terms and Agreement for Anirec+</Modal.Title>
               </Modal.Header>
-              <Modal.Body style={{color:'black'}}>
+              <Modal.Body style={{backgroundColor:'#121317e4', maxHeight:'450px', overflow: 'hidden', overflowY: 'auto'}}>
               <Terms />
               </Modal.Body>
-              <Modal.Footer>
+              <Modal.Footer style={{backgroundColor:'#121317',borderTop:'black'}}>
                 <Button style={{textTransform:'none', color:'white'}} onClick={handleClose} className="search-button">
                   Close
                 </Button>

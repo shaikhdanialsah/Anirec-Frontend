@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Container, Card, Modal, Row, Button, Placeholder, Spinner } from "react-bootstrap";
-import { TextField, Box, Snackbar, Alert} from "@mui/material";
+import { Container, Card, Modal, Row, Button, Spinner, Col } from "react-bootstrap";
+import { TextField, Box, Snackbar, Alert, Switch} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Avatar, IconButton } from "@mui/material";
 import { MdEdit } from "react-icons/md";
@@ -36,6 +36,7 @@ function EditProfile() {
   const [isLoading, setIsLoading] = useState(false);  // Set initial state to false
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [checked, setChecked] = useState(true);
 
   const wallpapers = ['https://rare-gallery.com/thumbs/945078-anime-Kimi-no-Na-Wa-night-low-angle.jpg', 'https://e1.pxfuel.com/desktop-wallpaper/204/232/desktop-wallpaper-comet-kimi-no-na-wa-your-name-your-name-pc.jpg', 'https://img.freepik.com/free-photo/japan-background-digital-art_23-2151546140.jpg'];
   
@@ -161,8 +162,6 @@ function EditProfile() {
     }
   };
   
-  
-  
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState("");
   const [snackbarSeverity, setSnackbarSeverity] = React.useState("success");
@@ -184,6 +183,10 @@ function EditProfile() {
     return <div>{error}</div>;
   }
 
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
   return (
     <section style={{ minHeight: "100vh", paddingTop: "80px" }}>
       <Container style={{ maxWidth: "600px", padding: "20px" }}>
@@ -194,7 +197,7 @@ function EditProfile() {
           <div
             style={{
               width: "100%",
-              height: "180px",
+              height: "140px",
               backgroundImage: `url(${background})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
@@ -257,7 +260,7 @@ function EditProfile() {
         >
           <form onSubmit={handleSubmit}>
             <ThemeProvider theme={darkTheme}>
-              <Box sx={{ marginBottom: "35px", textAlign: "left" }}>
+              <Box sx={{ marginBottom: "10px", textAlign: "left" }}>
                 <TextField
                   label="Your Name"
                   variant="outlined"
@@ -272,7 +275,22 @@ function EditProfile() {
                 />
               </Box>
 
-              <Box sx={{ margin: "auto" }}>
+
+            {/* <Row>
+              <Col lg="6" sm="6" xs="6" style={{textAlign:'left', paddingLeft:'18px'}}>
+                Hide Profile
+                </Col>
+                <Col lg="6" sm="6" xs="6" style={{textAlign:'right'}}>
+                  <Switch
+                    checked={checked}
+                    onChange={handleChange}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                  />
+                </Col>
+            </Row> */}
+              
+
+              <Box sx={{ margin: "auto", paddingTop:'15px' }}>
                 {isLoading ? (
                   <Button disabled className="search-button" style={{ marginRight: "20px" }}>
                     <Spinner animation="border" size="sm" style={{fontSize:"15px"}} /> Saving...
@@ -327,6 +345,7 @@ function EditProfile() {
                             : "3px solid transparent",
                         borderRadius: "8px",
                       }}
+                      className={previewImage === image ? "" : "selectImage"}
                     />
                   ) : (
                     <img
@@ -343,6 +362,7 @@ function EditProfile() {
                             : "4px solid transparent",
                         borderRadius: "50%",
                       }}
+                      className={previewImage === image ? "" : "selectImage"}
                     />
                   )}
                 </div>
@@ -350,7 +370,7 @@ function EditProfile() {
             </Row>
           </Modal.Body>
           <Modal.Footer style={{backgroundColor:'#121317',borderTop:'black'}}>
-            <Button variant="secondary" onClick={closeModal}>
+            <Button className="cancel-button" onClick={closeModal}>
               Cancel
             </Button>
             <Button onClick={saveImage} className="search-button">

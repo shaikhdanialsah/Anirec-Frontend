@@ -223,15 +223,15 @@ function NavBar() {
 
       {/* Logout Confirmation Modal */}
       <Modal show={showLogoutModal} onHide={handleLogoutModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Logout</Modal.Title>
+        <Modal.Header closeButton closeVariant='white' style={{backgroundColor:'#121317',borderBottom:'black'}}>
+          <Modal.Title style={{color:'whitesmoke'}}>Confirm Logout</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to log out?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleLogoutModalClose}>
+        <Modal.Body style={{backgroundColor:'#121317e4', color:'whitesmoke'}}>Are you sure you want to log out?</Modal.Body>
+        <Modal.Footer style={{backgroundColor:'#121317e4',borderTop:'black'}}>
+          <Button className="cancel-button" onClick={handleLogoutModalClose}>
             Cancel
           </Button>
-          <Button variant="danger" style={{backgroundColor:'#8B0000'}} onClick={handleLogout}>
+          <Button className="search-button" style={{backgroundColor:'#8B0000'}} onClick={handleLogout}>
             Logout
           </Button>
         </Modal.Footer>

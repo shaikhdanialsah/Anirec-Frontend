@@ -19,6 +19,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
   const { title, genres, description } = anime;
   const [showModal, setShowModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
   const [isFavourite, setIsFavourite] = useState(null);
   const [isDataReady, setIsDataReady] = useState(false); // Track data readiness
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
   const [loadingReviewId, setLoadingReviewId] = useState(null);
   const [isLoadingReview, setIsLoadingReview] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedReview, setSelectedReview] = useState(false);
 
   const toggleReadMore = () => {
     setIsExpanded(!isExpanded);
@@ -75,11 +77,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
 
   // API name
   const API_URL = process.env.REACT_APP_API_URL;
-
-  console.log(anime.title);
-  console.log(isFavourites);
-  console.log(isFavourite);
-
+  
   useEffect(() => {
     if (isLoggedIn) {
       if (user && typeof isFavourites != null) {
@@ -179,7 +177,14 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
     const diffInSeconds = Math.floor((now - createdDate) / 1000);
   
     if (diffInSeconds < 60) {
-      return `${diffInSeconds}sec ago`;
+      if(diffInSeconds < 1)
+      {
+        return `1sec ago`;
+      }
+      else
+      {
+        return `${diffInSeconds}sec ago`;
+      }
     }
   
     const diffInMinutes = Math.floor(diffInSeconds / 60);
@@ -204,7 +209,14 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
   
     const diffInMonths = Math.floor(diffInDays / 30);
     if (diffInMonths < 12) {
-      return `${diffInMonths}m ago`;
+      if(diffInMonths < 1)
+      {
+        return `1m ago`;
+      }
+      else
+      {
+        return `${diffInMonths}m ago`;
+      } 
     }
   
     const diffInYears = Math.floor(diffInMonths / 12);
@@ -303,7 +315,11 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
     }
   };
 
-  
+  const handleReviewModal = (review) =>
+  {
+      setSelectedReview(review);
+      setShowReviewModal(true);
+  };
 
   const handleDeleteReview = async (reviewId) => {
     try {
@@ -604,7 +620,7 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
                       ref={(el) => (reviewRefs.current[review.id] = el)} // Assign a unique ref to each review
                       id={review.id}
                     >
-                      <Col lg={1} md={1} sm={2} xs={2} className="d-flex justify-content-center">
+                      <Col lg={1} md={1} sm={2} xs={2} className="d-flex justify-content-center" style={{ cursor:'pointer'}} onClick={() => handleReviewModal(review)}>
                         {review.profile_picture ? (
                           <img
                             src={review.profile_picture}
@@ -712,19 +728,72 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
              
             </Row>
             )}
-        
       </Container>
 
       {/* Login Modal */}
       <Modal show={showLoginModal} onHide={() => setShowLoginModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Login Required</Modal.Title>
+         <Modal.Header closeButton closeVariant='white' style={{backgroundColor:'#121317',borderBottom:'black'}}>
+          <Modal.Title style={{color:'whitesmoke'}}>Login Required</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <p>Please log in to add this anime to your favourites.</p>
+        <Modal.Body style={{backgroundColor:'#121317e4', maxHeight:'450px', overflow: 'hidden', overflowY: 'auto'}}>
+        <p className="grey">Please log in to add this anime to your favourites.</p>
           <Button onClick={handleLogin} className="search-button" style={{ margin: 'auto' }}>Proceed to Log In</Button>
         </Modal.Body>
       </Modal>
+
+       {/* Review Modal */}
+       {selectedReview && (
+       <Modal show={showReviewModal} onHide={() => setShowReviewModal(false)}>
+          <Modal.Header closeButton closeVariant='white' style={{backgroundColor:'#121317',borderBottom:'black'}}>
+            <Modal.Title style={{color:'whitesmoke'}}>User Profile </Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={{backgroundColor:'#121317e4', maxHeight:'450px', overflow: 'hidden', overflowY: 'auto', textAlign: 'center'}}>
+          <div
+          style={{
+            position: 'relative',
+            margin:'auto',
+            width: '100%',
+            height: '120px',
+            marginBottom: '20px',
+            borderRadius: '10px',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Wallpaper Image */}
+          <img
+            src={selectedReview.wallpaper}
+            alt={`${selectedReview.name}'s wallpaper`}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+
+          {/* Profile Picture */}
+          <img
+            src={selectedReview.profile_picture}
+            alt={`${selectedReview.name}'s profile`}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '80px',
+              height: '80px',
+              borderRadius: '50%',
+              border: '3px solid white',
+            }}
+          />
+        </div>
+          <p className="grey"><strong>{selectedReview.name}</strong></p>
+          <Row>
+            <Col lg={6} sm={6} xs={6} className="grey"><strong>Favourites</strong><br /><p style={{marginTop:'10px', color:'#70cef0'}}><strong>{selectedReview.favourites_count}</strong></p></Col>
+            <Col lg={6} sm={6} xs={6} className="grey"><strong>Anime Reviewed</strong><br /><p style={{marginTop:'10px', color:'#70cef0'}}><strong>{selectedReview.reviews_count}</strong></p></Col>
+          </Row>
+          </Modal.Body>
+       </Modal>
+       )}
 
       <Snackbar
         open={snackbarOpen}
