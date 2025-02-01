@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Container, Row, Popover, Button, Modal, Col, ProgressBar, Alert as BootstrapAlert, Form, Spinner} from "react-bootstrap";
 import {Snackbar, Alert, Tab, Tabs} from '@mui/material';
 import { IoIosInformationCircleOutline, } from "react-icons/io";
-import {  FaVideo, FaTags, FaUserCircle, FaArrowUp, } from "react-icons/fa";
+import {  FaVideo, FaTags, FaUserCircle, FaArrowUp, FaRegTrashAlt } from "react-icons/fa";
 import { FaRegStar, FaStar } from "react-icons/fa6";
 import { AiFillCaretDown } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,8 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { PiSmileyFill, PiSmileyMehFill, PiSmileyNervousFill } from "react-icons/pi";
 import { GoDotFill } from "react-icons/go";
 import { getDeviceType } from '../../components/deviceCheck';
-import { FaRegTrashAlt } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
+import { MdModeComment } from "react-icons/md";
 
 
 function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
@@ -788,8 +788,8 @@ function SingleDetails({ anime, isLoggedIn, user, isFavourites, reviewsData }) {
         </div>
           <p className="grey"><strong>{selectedReview.name}</strong></p>
           <Row>
-            <Col lg={6} sm={6} xs={6} className="grey"><strong>Favourites</strong><br /><p style={{marginTop:'10px', color:'#70cef0'}}><strong>{selectedReview.favourites_count}</strong></p></Col>
-            <Col lg={6} sm={6} xs={6} className="grey"><strong>Anime Reviewed</strong><br /><p style={{marginTop:'10px', color:'#70cef0'}}><strong>{selectedReview.reviews_count}</strong></p></Col>
+            <Col lg={6} sm={6} xs={6} className="grey"><FaStar style={{color:"white", verticalAlign:'texttop', marginRight:'10px'}}/><strong>Favourites</strong><br /><p style={{marginTop:'10px', color:'#70cef0'}}><strong>{selectedReview.favourites_count}</strong></p></Col>
+            <Col lg={6} sm={6} xs={6} className="grey"><MdModeComment style={{color:"white", verticalAlign:'texttop', marginRight:'10px'}}/><strong>Anime Reviewed</strong><br /><p style={{marginTop:'10px', color:'#70cef0'}}><strong>{selectedReview.reviews_count}</strong></p></Col>
           </Row>
           </Modal.Body>
        </Modal>

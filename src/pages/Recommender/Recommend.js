@@ -138,11 +138,11 @@ function Recommend() {
         <>
         {/* Help Modal */}
     <Modal show={showHelpModal} onHide={handleHelpModalClose} centered>
-    <Modal.Header closeButton>
-        <Modal.Title>Help - How to Use</Modal.Title>
+    <Modal.Header closeButton closeVariant='white' style={{backgroundColor:'#121317',borderBottom:'black'}}>
+        <Modal.Title style={{color:'whitesmoke'}}>Help - How to Use</Modal.Title>
     </Modal.Header>
-    <Modal.Body>
-        <p><strong>To get anime recommendations:</strong></p>
+    <Modal.Body style={{backgroundColor:'#121317e4'}} className="grey">
+        <p style={{color:'whitesmoke'}}><strong>To get anime recommendations:</strong></p>
         <ol>
             <li>Type the <strong>name of the anime</strong> in the search box.</li>
             <li>Select a suggestion or press Enter to confirm your search.</li>
@@ -150,7 +150,7 @@ function Recommend() {
             <li>View the results or navigate to detailed recommendations.</li>
         </ol>
     </Modal.Body>
-    <Modal.Footer>
+    <Modal.Footer style={{backgroundColor:'#121317',borderTop:'black'}}>
         <Button className="search-button" onClick={handleHelpModalClose}>Close</Button>
     </Modal.Footer>
 </Modal>
